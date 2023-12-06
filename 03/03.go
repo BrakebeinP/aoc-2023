@@ -4,13 +4,21 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
 	"strconv"
-	"strings"
 	"unicode"
 )
 
+type Number struct {
+	num   string
+	val   int
+	row   int
+	start int
+	end   int
+}
+
 func main() {
-	f, err := os.Open("input.txt")
+	f, err := os.Open("test.txt")
 
 	if err != nil {
 		fmt.Println(err)
@@ -29,32 +37,58 @@ func main() {
 		data = append(data, curr_row)
 	}
 
-	var parts_list1 []int64
+	re := regexp.MustCompile(`\d{1,}`)
 
-	for i, r := range data {
-		var curr_num strings.Builder
-		var num_start int = 0
-		for j, c := range r {
-			if unicode.IsDigit(c) {
-				if curr_num.Len() == 0 {
-					num_start = j
+	var parts_list1 []Number
+
+	part1 := 0
+
+	for i, d := range data {
+		nums_in_row := re.FindAllString(d, -1)
+		num_idx := re.FindAllIndex([]byte(d), -1)
+		// fmt.Printf("r%v:%v\n", i, nums_in_row)
+
+		if nums_in_row != nil {
+			for j, num := range nums_in_row {
+				value, _ := strconv.ParseInt(num, 10, 0)
+				curr_num := Number{num: num, val: int(value), row: i, start: num_idx[j][0], end: num_idx[j][1]}
+				if is_valid_part(curr_num, data) {
+					parts_list1 = append(parts_list1, curr_num)
+					part1 += curr_num.val
 				}
-				fmt.Fprintf(&curr_num, "%v", c)
-			} else if curr_num.Len() != 0 {
-				if is_valid_part(curr_num.String(), i, num_start) {
-					n, err := strconv.ParseInt(curr_num.String(), 10, 64)
-					if err != nil {
-						fmt.Println(err)
-					}
-					parts_list1 = append(parts_list1, n)
-				}
-				curr_num.Reset()
-				num_start = 0
+
+				// fmt.Println(curr_num)
 			}
 		}
 	}
+
+	fmt.Printf("part1: %v\n", part1)
 }
 
-func is_valid_part(s string, r int, c int) bool {
-	var symbols [10]rune{'#', '$', '%', '&', '@', '-', '+', '*', '/', '='}
+func is_valid_part(n Number, d []string) bool {
+	// symbols := []string{"#", "$", "%", "&", "@", "-", "+", "*", "/", "="}
+	var start int
+	var end int
+	if n.start-1 < 0 {
+		start = 0
+	} else {
+		start = n.start - 1
+	}
+	if n.end == len(d[n.row]) {
+		end = n.end - 1
+	} else {
+		end = n.end
+	}
+	rr := []int{-1, 0, 1}
+	for _, i := range rr {
+		r := n.row + i
+		if r >= 0 && r < len(d) {
+			for c := start; c <= end; c++ {
+				if string(d[r][c]) != "." && !unicode.IsDigit(rune(d[r][c])) {
+					return true
+				}
+			}
+		}
+	}
+	return false
 }
