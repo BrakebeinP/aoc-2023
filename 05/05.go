@@ -25,4 +25,12 @@ func main() {
 		}
 		data = append(data, curr_row)
 	}
+
+	map_values := make(map[string][]string)
+
+	for i, d := range data {
+		if i == 0 {
+
+		}
+	}
 }
