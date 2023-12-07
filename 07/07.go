@@ -83,15 +83,21 @@ func main() {
 	}
 
 	var hands []Hand
+	var hands2 []Hand
+
 	for _, d := range data {
 		h := strings.Split(d, " ")[0]
 		b := strings.Split(d, " ")[1]
+
 		cards := parse_hand(h)
 		handtype := get_hand_type(cards)
 		bet, _ := strconv.ParseInt(b, 10, 64)
+
 		hand := Hand{cards: cards, htype: handtype, bid: bet}
-		// fmt.Printf("%v:\n cards: %v\n type: %v\n bid: %v\n", d, cards, handtype.String(), bet)
 		hands = append(hands, hand)
+
+		hand2 := upgrade_hand(hand)
+		hands2 = append(hands2, hand2)
 	}
 
 	slices.SortFunc(hands, func(a, b Hand) int {
@@ -111,8 +117,36 @@ func main() {
 	for i, hand := range hands {
 		part1 += (i + 1) * int(hand.bid)
 	}
+
+	slices.SortFunc(hands2, func(a, b Hand) int {
+		if handval := cmp.Compare(a.htype, b.htype); handval != 0 {
+			return handval
+		} else {
+			for i := 0; i < 5; i++ {
+				ca := a.cards[i]
+				cb := b.cards[i]
+				if ca == Jack && cb != Jack {
+					return -1
+				} else if ca != Jack && cb == Jack {
+					return 1
+				}
+				if c := cmp.Compare(ca, cb); c != 0 {
+					return c
+				}
+			}
+		}
+		return 0
+	})
+
+	// fmt.Printf("%v\n", hands2)
+	part2 := 0
+	for i, hand := range hands2 {
+		part2 += (i + 1) * int(hand.bid)
+	}
+
 	fmt.Printf("part1: %v\n", part1)
-	// fmt.Printf("%v: %T\n", strings.Split("test", "")[0], strings.Split("test", "")[0])
+	fmt.Printf("part2: %v\n", part2)
+
 }
 
 func parse_hand(s string) []Card {
@@ -191,4 +225,44 @@ func get_hand_type(h []Card) HandType {
 		}
 	}
 	return -1
+}
+
+func upgrade_hand(h Hand) Hand {
+	c_counts := make(map[Card]int)
+	for _, c := range h.cards {
+		if _, exists := c_counts[c]; exists {
+			c_counts[c]++
+		} else {
+			c_counts[c] = 1
+		}
+	}
+	jack_count, exists := c_counts[Jack]
+	if !exists {
+		return h
+	}
+
+	switch h.htype {
+	case FiveOfAKind, FourOfAKind, FullHouse:
+		h.htype = FiveOfAKind
+		break
+	case ThreeOfAKind:
+		h.htype = FourOfAKind
+		break
+	case TwoPairs:
+		if jack_count == 2 {
+			h.htype = FourOfAKind
+		} else {
+			h.htype = FullHouse
+		}
+		break
+	case OnePair:
+		h.htype = ThreeOfAKind
+		break
+	case HighCard:
+		h.htype = OnePair
+		break
+	default:
+		break
+	}
+	return h
 }
