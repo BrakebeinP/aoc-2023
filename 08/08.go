@@ -8,12 +8,13 @@ import (
 )
 
 type Node struct {
+	name  string
 	left  string
 	right string
 }
 
 func main() {
-	f, err := os.Open("test.txt")
+	f, err := os.Open("input.txt")
 
 	if err != nil {
 		fmt.Println(err)
@@ -45,16 +46,19 @@ func main() {
 			continue
 		}
 		n := re.FindAllString(d, -1)
-		fmt.Println(n)
-		nodes[n[0]] = Node{left: n[1], right: n[2]}
+		// fmt.Println(n)
+		nodes[n[0]] = Node{name: n[0], left: n[1], right: n[2]}
 	}
 
-	destination_reached := false
+	fmt.Println(directions, len(directions))
+
 	dir_counter := 0
 	curr_node := nodes["AAA"]
 	part1 := 0
 	for {
 		curr_dir := string(directions[dir_counter])
+		// fmt.Printf("node %v:\n  left: %v\n  right: %v\n chosen dir: %v\n", curr_node.name, curr_node.left, curr_node.right, curr_dir)
+
 		switch curr_dir {
 		case "L":
 			curr_node = nodes[curr_node.left]
@@ -63,12 +67,14 @@ func main() {
 		}
 
 		part1++
-		dir_counter++
-		if dir_counter >= len(directions) {
-			dir_counter = 0
-		}
-		if destination_reached {
+
+		if curr_node.name == "ZZZ" {
 			break
+		}
+
+		dir_counter++
+		if !(dir_counter < len(directions)) {
+			dir_counter = 0
 		}
 	}
 

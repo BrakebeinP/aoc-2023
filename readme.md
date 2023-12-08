@@ -3,6 +3,9 @@
 Learning as I Go... ha ha ha, get it?
 
 ## Notes/thoughts on the problems
+### Day 8:
+Not too bad. Some logic errors on my end for part 1.
+
 ### Day 7:
 Seemed like an enum problem, so I figured I'd try some of that.<br />
 Took some time setting up the enums and functions, but part 1 was easy first try once that was done.<br />
