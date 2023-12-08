@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strings"
 )
 
 type Node struct {
@@ -50,14 +51,12 @@ func main() {
 		nodes[n[0]] = Node{name: n[0], left: n[1], right: n[2]}
 	}
 
-	fmt.Println(directions, len(directions))
-
 	dir_counter := 0
 	curr_node := nodes["AAA"]
 	part1 := 0
+
 	for {
 		curr_dir := string(directions[dir_counter])
-		// fmt.Printf("node %v:\n  left: %v\n  right: %v\n chosen dir: %v\n", curr_node.name, curr_node.left, curr_node.right, curr_dir)
 
 		switch curr_dir {
 		case "L":
@@ -78,5 +77,50 @@ func main() {
 		}
 	}
 
-	fmt.Printf("part1: %v", part1)
+	var part2_nodes []Node
+	for k := range nodes {
+		if strings.HasSuffix(k, "A") {
+			part2_nodes = append(part2_nodes, nodes[k])
+		}
+	}
+	fmt.Println(part2_nodes)
+
+	part2 := 0
+	dir_counter = 0
+	z_count := 0
+
+	for i := 0; i < 10; i++ {
+		curr_dir := string(directions[dir_counter])
+
+		for j, n := range part2_nodes {
+			switch curr_dir {
+			case "L":
+				part2_nodes[j] = nodes[n.left]
+			case "R":
+				part2_nodes[j] = nodes[n.right]
+			}
+		}
+
+		part2++
+
+		for _, n := range part2_nodes {
+			if strings.HasSuffix(n.name, "Z") {
+				z_count++
+			}
+		}
+
+		if z_count == len(part2_nodes) {
+			break
+		} else {
+			z_count = 0
+		}
+
+		dir_counter++
+		if !(dir_counter < len(directions)) {
+			dir_counter = 0
+		}
+	}
+
+	fmt.Printf("part1: %v\n", part1)
+	fmt.Printf("part2: %v\n", part2)
 }

@@ -4,7 +4,8 @@ Learning as I Go... ha ha ha, get it?
 
 ## Notes/thoughts on the problems
 ### Day 8:
-Not too bad. Some logic errors on my end for part 1.
+Not too bad. Some logic errors on my end for part 1. <br />
+Part 2 seems so straightforward, but I think I'm missing something. Will have to get back to it once my head is clearer
 
 ### Day 7:
 Seemed like an enum problem, so I figured I'd try some of that.<br />
