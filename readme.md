@@ -3,6 +3,25 @@
 Learning as I Go... ha ha ha, get it?
 
 ## Notes/thoughts on the problems
+### Day 14:
+Had some time to do this one today. Part 1 was fairly easy, but part 2 is taking some time to ~~brute force~~ solve. <br />
+Might have to rethink part 2.
+
+### Day 13:
+See day 12.
+
+### Day 12:
+Catching up on other stuff since the trip. Will start soonish.
+
+### Day 11:
+See day 10.
+
+### Day 10:
+Was away from the 9th to the 11th, so only just started a bit with day 9's problem. Will start this when I have more time.
+
+### Day 9:
+Part 1 seems fairly straightforward. I think what I have at the moment is just some dumb error in the function.
+
 ### Day 8:
 Not too bad. Some logic errors on my end for part 1. <br />
 Part 2 seems so straightforward, but I think I'm missing something. Will have to get back to it once my head is clearer
