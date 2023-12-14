@@ -17,7 +17,7 @@ const (
 )
 
 func main() {
-	f, err := os.Open("input.txt")
+	f, err := os.Open("test.txt")
 
 	if err != nil {
 		fmt.Println(err)
@@ -58,23 +58,53 @@ func main() {
 	fmt.Printf("part1: %v\n", calc_score(gridp1))
 
 	cycle_count := 1000000000
+	directions := []Direction{North, West, South, East}
 
-	var mod int
+	gridmap := make(map[string]map[Direction]string)
+
+	curr_grid := grid_to_string(gridp2)
+	first_rotation := 0
+	var next_dir Direction
 	for cnt := 1; cnt <= cycle_count; cnt++ {
-		shift_north(gridp2)
-		shift_west(gridp2)
-		shift_south(gridp2)
-		shift_east(gridp2)
-
-		if cnt%100000 == 0 {
-			fmt.Println(cnt)
+		for d := 0; d < len(directions); d++ {
+			dir := directions[d]
+			if _, ok := gridmap[curr_grid]; ok {
+				if grd, ok2 := gridmap[curr_grid][dir]; ok2 {
+					curr_grid = grd
+					if first_rotation == 0 {
+						first_rotation = cnt
+						next_dir = dir
+						break
+					}
+				} else {
+					gridmap[curr_grid][dir] = shift_grid(gridp2, dir)
+					curr_grid = gridmap[curr_grid][dir]
+				}
+			} else {
+				gridmap[curr_grid] = make(map[Direction]string)
+				gridmap[curr_grid][dir] = shift_grid(gridp2, dir)
+				curr_grid = gridmap[curr_grid][dir]
+			}
 		}
-		if is_equal(gridp2, grid_orig) {
-			mod = cnt
+		if first_rotation != 0 {
 			break
 		}
+
+		if cnt%1000000 == 0 {
+			fmt.Println(cnt)
+		}
+
 	}
-	fmt.Println(mod)
+	fmt.Println(first_rotation)
+	// print_grid(gridp2)
+	rem := cycle_count % first_rotation
+
+	for i := 0; i < rem; i++ {
+		for d := 0; d < len(directions); d++ {
+			dir := directions[d]
+			shift_grid(gridp2, dir)
+		}
+	}
 
 	fmt.Printf("part2: %v\n", calc_score(gridp2))
 }
@@ -198,4 +228,27 @@ func shift_east(grid [][]string) {
 			}
 		}
 	}
+}
+
+func shift_grid(grid [][]string, dir Direction) string {
+	switch dir {
+	case North:
+		shift_north(grid)
+	case West:
+		shift_west(grid)
+	case South:
+		shift_south(grid)
+	case East:
+		shift_east(grid)
+	}
+
+	return grid_to_string(grid)
+}
+
+func grid_to_string(grid [][]string) string {
+	var str []string
+	for _, r := range grid {
+		str = append(str, strings.Join(r, ""))
+	}
+	return strings.Join(str, "\n")
 }
