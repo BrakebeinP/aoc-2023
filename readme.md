@@ -23,9 +23,10 @@ See day 10.
 ### Day 10 (${\color{black}★★}$):
 Was away from the 9th to the 11th, so only just started a bit with day 9's problem. Will start this when I have more time.
 
-### Day 9 (${\color{yellow}★\color{black}★}$):
+### Day 9 (${\color{yellow}★★}$):
 Part 1 seems fairly straightforward. I think what I have at the moment is just some dumb error in the function.<br />
-Update 231215: Yep, stupid logic error. Instead of checking for sum, I should've checked if everything was 0.
+Update 231215: Yep, stupid logic error. Instead of checking for sum, I should've checked if everything was 0.<br />
+As soon as I figured out the way to reverse the logic, this was easy. Fun challenge.
 
 ### Day 8 (${\color{yellow}★\color{black}★}$):
 Not too bad. Some logic errors on my end for part 1. <br />
