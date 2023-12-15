@@ -1,10 +1,11 @@
-# Advent of Code 2023 in Go ${\color{yellow}(15/50★)}$
-### Trigger Warning: bad code, terrible naming (nothing offensive)
-Learning as I Go... ha ha ha, get it?
+# Advent of Code 2023 in Go (15/50${\color{yellow}★})$
+### Trigger Warning: bad code, terrible variable naming (nothing offensive)
+Learning as I Go... ![alt text](https://cdn.frankerfacez.com/emoticon/285676/1 "ha ha ha, get it?")
 
 ## Notes/thoughts on the problems:
-### Day 15 (${\color{yellow}★\color{black}★}$):
-Part 1 wasn't too bad. Part 2 requires some thinking, which is hard. But it's enjoyable hard.
+### Day 15 (${\color{yellow}★★}$):
+Part 1 wasn't too bad. Part 2 requires some thinking, which is hard. But it's enjoyable hard.<br />
+Part 2 update: Minor dumb mistakes here and there lead to this taking longer than it should've. But we did it Reddit!
 
 ### Day 14 (${\color{yellow}★\color{black}★}$):
 Had some time to do this one today. Part 1 was fairly easy, but part 2 is taking some time to ~~brute force~~ solve. <br />

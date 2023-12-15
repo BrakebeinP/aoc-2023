@@ -15,7 +15,7 @@ type Lens struct {
 }
 
 func main() {
-	f, err := os.Open("test.txt")
+	f, err := os.Open("input.txt")
 
 	if err != nil {
 		fmt.Println(err)
@@ -49,8 +49,9 @@ func main() {
 			// remove lens from box
 			lens_str := strings.Replace(inst, "-", "", 1)
 			box_no := hash_alg(lens_str)
-			if lens_idx := contains(boxes[box_no], lens_str); lens_idx > 0 {
-				remove_lens(boxes[box_no], lens_idx)
+			// i'm fucking stupid, why did i have > 0 instead of > -1
+			if lens_idx := contains(boxes[box_no], lens_str); lens_idx > -1 {
+				remove_lens(boxes, box_no, lens_idx)
 			}
 		} else {
 			// add/update lens in box
@@ -65,15 +66,13 @@ func main() {
 				boxes[box_no] = append(boxes[box_no], lens)
 			}
 		}
-		fmt.Printf("\nAfter \"%v\":\n", inst)
-		print_boxes(boxes)
 	}
 	part2 := 0
 
-	for _, b := range boxes {
+	for i, b := range boxes {
 		if len(b) > 0 {
-			for i, l := range b {
-				part2 += (i + 1) * int(l.strenth)
+			for j, l := range b {
+				part2 += (i + 1) * (j + 1) * int(l.strenth)
 			}
 		}
 	}
@@ -109,13 +108,17 @@ func contains(b []Lens, s string) int {
 	return -1
 }
 
-func remove_lens(b []Lens, i int) {
-	if last := len(b) - 1; i == last {
-		b = b[:last]
+func remove_lens(b [][]Lens, n int, i int) {
+	if i == 0 && len(b) == 1 {
+		b[n] = b[n][:0]
+	} else if i == 0 {
+		b[n] = b[n][1:]
+	} else if last := len(b[n]) - 1; i == last {
+		b[n] = b[n][:last]
 	} else if i > last || i < 0 {
-		fmt.Printf("%v out of bounds: %v\n", i, b)
+		fmt.Printf("%v out of bounds: %v\n", i, b[n])
 	} else {
-		b = append(b[:i], b[i+1:]...)
+		b[n] = append(b[n][:i], b[n][i+1:]...)
 	}
 }
 
