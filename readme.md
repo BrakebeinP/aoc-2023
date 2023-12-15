@@ -1,4 +1,4 @@
-# Advent of Code 2023 in Go (16/50${\color{yellow}★}$)
+# Advent of Code 2023 in Go (16/50 ${\color{yellow}★}$)
 ### Trigger Warning: bad code, terrible variable naming (nothing offensive)
 Learning as I Go... ![alt text](https://cdn.frankerfacez.com/emoticon/285676/1 "ha ha ha, get it?")
 
