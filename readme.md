@@ -3,10 +3,10 @@
 Learning as I Go... ha ha ha, get it?
 
 ## Notes/thoughts on the problems:
-### Day 15 (${\color{yellow}★}$${\color{black}★}$):
+### Day 15 (${\color{yellow}★\color{black}★}$):
 Part 1 wasn't too bad. Part 2 requires some thinking, which is hard. But it's enjoyable hard.
 
-### Day 14 (${\color{yellow}★}$${\color{black}★}$):
+### Day 14 (${\color{yellow}★\color{black}★}$):
 Had some time to do this one today. Part 1 was fairly easy, but part 2 is taking some time to ~~brute force~~ solve. <br />
 Might have to rethink part 2.
 
@@ -25,7 +25,7 @@ Was away from the 9th to the 11th, so only just started a bit with day 9's probl
 ### Day 9 (${\color{black}★★}$):
 Part 1 seems fairly straightforward. I think what I have at the moment is just some dumb error in the function.
 
-### Day 8 (${\color{yellow}★}$${\color{black}★}$):
+### Day 8 (${\color{yellow}★\color{black}★}$):
 Not too bad. Some logic errors on my end for part 1. <br />
 Part 2 seems so straightforward, but I think I'm missing something. Will have to get back to it once my head is clearer
 
@@ -57,5 +57,5 @@ Man, what was that part 2?<br />
 The examples showed no signs of having to allow, for instance, "oneeight" to be parsed as both 1 and 8. Kinda annoyed at that.
 
 [//]: # "0* (${\color{black}★★}$)"
-[//]: # "1* (${\color{yellow}★}$${\color{black}★}$)"
+[//]: # "1* (${\color{yellow}★\color{black}★}$)"
 [//]: # "2* (${\color{yellow}★★}$)"
