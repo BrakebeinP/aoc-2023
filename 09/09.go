@@ -37,29 +37,48 @@ func main() {
 			num, _ := strconv.ParseInt(n, 10, 64)
 			nums = append(nums, num)
 		}
-		next_num := find_pattern(nums)
+		next_num := find_pattern(nums, ln == 42)
 		part1 += next_num
-		fmt.Printf("ln %v: %v\n", ln+1, next_num)
 	}
 
 	fmt.Printf("part1: %v\n", part1)
 }
 
-func find_pattern(nums []int64) int64 {
+func find_pattern(nums []int64, dbg bool) int64 {
 	var diffs []int64
 	for i := 0; i < len(nums)-1; i++ {
 		diffs = append(diffs, nums[i+1]-nums[i])
 	}
-
-	nums_val := 0
-	var return_val int64 = 0
-	for _, diff := range diffs {
-		nums_val += int(diff)
+	if dbg {
+		fmt.Println(diffs)
 	}
-	if nums_val == 0 {
+
+	var diff_val int64 = 0
+	if all_zeroes(diffs) {
 		return nums[len(nums)-1]
 	} else {
-		return_val = find_pattern(diffs)
+		diff_val = find_pattern(diffs, dbg)
 	}
-	return nums[len(nums)-1] + return_val
+
+	if dbg {
+		fmt.Println(diff_val)
+	}
+	return nums[len(nums)-1] + diff_val
+}
+
+func sum(a []int64) int64 {
+	var s int64 = 0
+	for _, n := range a {
+		s += n
+	}
+	return s
+}
+
+func all_zeroes(a []int64) bool {
+	for _, v := range a {
+		if v != 0 {
+			return false
+		}
+	}
+	return true
 }

@@ -1,4 +1,4 @@
-# Advent of Code 2023 in Go (16/50${\color{yellow}★}$)
+# Advent of Code 2023 in Go (16/50 ${\color{yellow}★}$)
 ### Trigger Warning: bad code, terrible variable naming (nothing offensive)
 Learning as I Go... ![alt text](https://cdn.frankerfacez.com/emoticon/285676/1 "ha ha ha, get it?")
 
@@ -23,8 +23,9 @@ See day 10.
 ### Day 10 (${\color{black}★★}$):
 Was away from the 9th to the 11th, so only just started a bit with day 9's problem. Will start this when I have more time.
 
-### Day 9 (${\color{black}★★}$):
-Part 1 seems fairly straightforward. I think what I have at the moment is just some dumb error in the function.
+### Day 9 (${\color{yellow}★\color{black}★}$):
+Part 1 seems fairly straightforward. I think what I have at the moment is just some dumb error in the function.<br />
+Update 231215: Yep, stupid logic error. Instead of checking for sum, I should've checked if everything was 0.
 
 ### Day 8 (${\color{yellow}★\color{black}★}$):
 Not too bad. Some logic errors on my end for part 1. <br />
